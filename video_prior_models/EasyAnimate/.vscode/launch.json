@@ -1,0 +1,90 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Python 调试程序: 当前文件",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "run_EzAni_inference",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "/root/autodl-tmp/EasyAnimate/EzAni_inference.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--text_Prompt",
+                "A camera flyover, cruising steadily across the scene. Clean motion with rich detail. High quality.",
+                // //data: village_campareOrigin_F48
+                // "--origin_frame_dir", "input/Interp-24-07_11-26-44_Style:_DSLR_35mm_landscape._Entities:_mo/images/frames_for_svd_inpainting",  
+                // "--origin_mask_dir", "input/Interp-24-07_11-26-44_Style:_DSLR_35mm_landscape._Entities:_mo/images/masks_for_svd_inpainting",    
+                // // //data: red test
+                // "--origin_frame_dir", "input/red_test/images/frames_for_svd_inpainting",  
+                // "--origin_mask_dir", "input/red_test/images/masks_for_svd_inpainting",  
+                // //data: alice1
+                // "--origin_frame_dir", "./input/Interp-24-07_15-09-28_Style:_Monet_painting._Entities:_tea_tab/images/frames_for_svd_inpainting",  
+                // "--origin_mask_dir", "./input/Interp-24-07_15-09-28_Style:_Monet_painting._Entities:_tea_tab/images/masks_for_svd_inpainting",            
+                // //data: alice1, half_table
+                "--origin_frame_dir",
+                "./input/chair_test/images/frames_for_svd_inpainting",
+                "--origin_mask_dir",
+                "./input/chair_test/images/masks_for_svd_inpainting",
+                // //data: waldon_blackLine
+                // "--origin_frame_dir", "./input/waldon_blackLine/images/frames_for_svd_inpainting",  
+                // "--origin_mask_dir", "./input/waldon_blackLine/images/masks_for_svd_inpainting", 
+                // //data: forbbiden_test
+                // "--origin_frame_dir", "./input/forbbiden_test/images/frames_for_svd_inpainting",  
+                // "--origin_mask_dir", "./input/forbbiden_test/images/masks_for_svd_inpainting", 
+                // // //data: micraft_test
+                // "--origin_frame_dir", "./input/micraft_test/images/frames_for_svd_inpainting",  
+                // "--origin_mask_dir", "./input/micraft_test/images/masks_for_svd_inpainting", 
+                // //data: inkWoodland_test
+                // "--origin_frame_dir", "./input/inkWoodland_test/images/frames_for_svd_inpainting",  
+                // "--origin_mask_dir", "./input/inkWoodland_test/images/masks_for_svd_inpainting", 
+                // usually unchanged
+                "--output_frame_dir",
+                "./fake_output_frame_dir",
+                "--lr",
+                "0.025",
+                // output names
+                "--result_analyze_dir",
+                // "./output/AblationStudy/micraft_test_[PriorPS_PAD4]_PRIOR_17_lr_0dot025_REP_END_17_REP_ROUND_15_MLCUT_0dot85"
+                "./output/AblationStudy/chair_test_[PriorPS_PAD4_TELEA_PADPRIOR]_PRIOR_20_lr_0dot025_REP_END_20_REP_ROUND_15_MLCUT_0dot8"
+            ]
+        },
+        {
+            "name": "run_predict_i2v_from_wonderjourney",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "/root/autodl-tmp/EasyAnimate/predict_i2v_from_wonderjourney.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--image_path",
+                // "./asset/keyframe_flamingoes.png",
+                // "./asset/keyframe_flamingoes2.png",
+                // "./asset/keyframe_flamingoes3.png",
+                // "./asset/keyframe_flower.png",
+                // "./asset/keyframe_flower2.png",
+                // "./asset/keyframe_horse.png",
+                // "./asset/keyframe_rabbit.png",
+                // "./asset/keyframe_realRabbit.png",
+                // "./asset/keyframe_ancientFlower.png",
+                "./asset/keyframe_snowRiver.png",
+                "--inpainting_entities",
+                // Horses galloping is not identified in the given image. 2. Barn doors swinging is not identified in the given image. 3. Hay falling from hayloft is not identified in the given image. 4. Chooks pecking at feed is not identified in the given image. 5. Tractor chugging along is identified in the given image. The tractor seems to be moving forward. Scores for the identified object: Tractor (Visual Significance: High, Motion Tendency: High, Visual Clearity: High). Therefore, the final choice is Tractor.
+                // "Horses, Barn doors, Hay, Chooks, Tractor" // keyframe_horse
+                // "fairies, unicorns, mystical plants, stream, dust particles" // keyframe_flower
+                // "flamingoes, playing cards, hedgehogs, roses, croquet balls" // keyframe_flamingoes
+                // "tea pots, march hare, cards, door mouse, fireflies" // keyframe_rabbit
+                // "rabbit, carrots, earthworm, beetle, water" // keyframe_realRabbit
+                // "creek, eagle, flowers, bees, clouds"
+                // "flamingos flapping, hedgehogs rolling, cards painting roses, Queen of Hearts marching, Alice running"
+                "glacial river, avalanche, snowflakes, winds, eagles"
+                // "[\"flamingos flapping\", \"hedgehogs rolling\", \"cards painting roses\", \"Queen of Hearts marching\", \"Alice running\"]"
+            ]
+        }
+    ]
+}
