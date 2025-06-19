@@ -20,7 +20,8 @@ imageio[ffmpeg]
 imageio[pyav]
 tensorboard
 gradio==3.41.2
-diffusers==0.28.2
+openai==0.28.1
+huggingface-hub==0.26.2
 transformers==4.37.2
 beautifulsoup4
 ftfy

@@ -68,4 +68,3 @@ custom_mode: "wonderjourney"
 skip_depth_refine: True
 skip_visibility_check: True
 keep_constant_frame: True
-oneformer_checkpoint: "/root/autodl-tmp/local_models/oneformer_coco_swin_large" # set the path for the checkpoint of oneformer

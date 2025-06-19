@@ -59,7 +59,7 @@
             "name": "run_predict_i2v_from_wonderjourney",
             "type": "debugpy",
             "request": "launch",
-            "program": "/root/autodl-tmp/EasyAnimate/predict_i2v_from_wonderjourney.py",
+            "program": "./predict_i2v_from_wonderjourney.py",
             "console": "integratedTerminal",
             "args": [
                 "--image_path",

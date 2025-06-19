@@ -8,7 +8,7 @@ from datetime import datetime
 from copy import deepcopy
 import json
 
-from transformers import OneFormerForUniversalSegmentation, OneFormerProcessor
+# from transformers import OneFormerForUniversalSegmentation, OneFormerProcessor
 import numpy as np
 import torch
 from omegaconf import OmegaConf
@@ -129,8 +129,8 @@ def run(config):
     inpainting_resolution_gen = config['inpainting_resolution_gen']
     seeding(config["seed"])
 
-    segment_processor = OneFormerProcessor.from_pretrained(config["oneformer_checkpoint"])
-    segment_model = OneFormerForUniversalSegmentation.from_pretrained(config["oneformer_checkpoint"])
+    # segment_processor = OneFormerProcessor.from_pretrained(config["oneformer_checkpoint"])
+    # segment_model = OneFormerForUniversalSegmentation.from_pretrained(config["oneformer_checkpoint"])
 
     mask_generator = create_mask_generator()
 
@@ -208,7 +208,7 @@ def run(config):
                     # first keyframe is loaded and estimated depth
                     kf_gen = KeyframeGen(config, inpainter_pipeline, mask_generator, depth_model, vae, rotation, 
                                         start_keyframe, inpainting_prompt, regen_negative_prompt + adaptive_negative_prompt,
-                                        segment_model=segment_model, segment_processor=segment_processor).to(config["device"])
+                                        segment_model=None, segment_processor=None).to(config["device"])
                     save_root = Path(kf_gen.run_dir) / "images"
                     with open(save_root / "inpainting_prompt.txt", "w") as file:  
                         file.write(inpainting_prompt)  

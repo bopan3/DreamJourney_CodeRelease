@@ -32,7 +32,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import yaml
 import yaml
-import anthropic
+# import anthropic
 LLM_config_yaml = yaml.load(open('./LLM_CONFIG/llm_config.yaml', 'r'), Loader=yaml.SafeLoader)
 APIKEY = LLM_config_yaml['APIKEY']
 API_BASE = LLM_config_yaml['API_BASE']
