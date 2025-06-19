@@ -61,7 +61,7 @@ Download Midas DPT model and put it to the root directory.
 wget https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_beit_large_512.pt
 ```
 
-Set up independent environment for EasyAnimate (which is used as video prior model):
+Set up independent environment for [EasyAnimate](https://github.com/aigc-apps/EasyAnimate) (which is used as video prior model):
 
 ```bash
 ## enter EasyAnimate's dir
@@ -95,11 +95,6 @@ apt-get install ffmpeg
 cd ../../
 ```
 
-
-
-
-
-
 Set your OpenAI api_key at LLM_CONFIG/llm_config.yaml:
 
 ```yaml
@@ -112,98 +107,15 @@ API_MODEL_NAME: "your_api_model_name_here"
 
 ### Run examples 
 
-- Example config file
+- Run minimal example (run one short camera trace under one theme)
 
-  To run an example, first you need to write a config. An example config `./config/village.yaml` is shown below:
+```bash
+sh ./run_single_demo.sh
+```
+(check the generated video (in mp4 format) in ./output)
 
-  ```yaml
-  runs_dir: output/56_village
-  
-  example_name: village
-  
-  seed: -1
-  frames: 10
-  save_fps: 10
-  
-  finetune_decoder_gen: True
-  finetune_decoder_interp: False  # Turn on this for higher-quality rendered video
-  finetune_depth_model: True
-  
-  num_scenes: 4
-  num_keyframes: 2
-  use_gpt: True
-  kf2_upsample_coef: 4
-  skip_interp: False
-  skip_gen: False
-  enable_regenerate: True
-  
-  debug: True
-  inpainting_resolution_gen: 512
-  
-  rotation_range: 0.45
-  rotation_path: [0, 0, 0, 1, 1, 0, 0, 0]
-  camera_speed_multiplier_rotation: 0.2
-  ```
-
-  The total frames of the generated example is `num_scenes` $\times$ `num_keyframes`. You can manually adjust `rotation_path` in the config file to control the rotation state of the camera in each frame. A value of $0$ indicates moving straight, $1$ signifies a right turn, and $-1$ indicates a left turn.  
-
-- Run
-
-  ```bash
-  python run.py --example_config config/village.yaml
-  ```
-  You will see results in `output/56_village/{time-string}_merged`.
-
-### How to add more examples?
-
-We highly encourage you to add new images and try new stuff!
-You would need to do the image-caption pairing separately (e.g., using DALL-E to generate image and GPT4V to generate description).
-
-- Add a new image in `./examples/images/`.
-
-- Add content of this new image in `./examples/examples.yaml`.
-
-  Here is an example:
-
-  ```yaml
-  - name: new_example
-    image_filepath: examples/images/new_example.png
-    style_prompt: DSLR 35mm landscape
-    content_prompt: scene name, object 1, object 2, object 3
-    negative_prompt: ''
-    background: ''
-  ```
-
-  - **content_prompt**: "scene name", "object 1", "object 2", "object 3"
-
-  - **negative_prompt** and **background** are optional
-
-  For controlled journey, you need to add `control_text`. Examples are as follow:
-
-  ```yaml
-  - name: poem_jiangxue
-    image_filepath: examples/images/60_poem_jiangxue.png
-    style_prompt: black and white color ink painting
-    content_prompt: Expansive mountainous landscape, old man in traditional attire, calm river, mountains
-    negative_prompt: ""
-    background: ""
-    control_text: ["千山鸟飞绝", "万径人踪灭", "孤舟蓑笠翁", "独钓寒江雪"]
-    
-  - name: poem_snowy_evening
-    image_filepath: examples/images/72_poem_snowy_evening.png
-    style_prompt: Monet painting
-    content_prompt: Stopping by woods on a snowy evening, woods, snow, village
-    negative_prompt: ""
-    background: ""
-    control_text: ["Snowy Woods and Farmhouse: A secluded farmhouse, a frozen lake, a dense thicket, a quiet meadow, a chilly wind, a pale twilight, a covered bridge, a rustic fence, a snow-laden tree, and a frosty ground", "The Traveler's Horse: A restless horse, a jingling harness, a snowy mane, a curious gaze, a sturdy hoof, a foggy breath, a leather saddle, a woolen blanket, a frost-covered tail, and a patient stance", "Snowfall in the Woods: A gentle snowflake, a whispering wind, a soft flurry, a white blanket, a twinkling icicle, a bare branch, a hushed forest, a crystalline droplet, a serene atmosphere, and a quiet night", "Deep, Dark Woods in the Evening: A mysterious grove, a shadowy tree, a darkened sky, a hidden trail, a silent owl, a moonlit glade, a dense underbrush, a quiet clearing, a looming branch, and an eerie stillness"]
-  ```
-
-- Write a config `config/new_example.yaml` like `./config/village.yaml` for the new example
-
-- Run
-
-  ```bash
-  python run.py --example_config config/new_example.yaml
-  ```
-
-
+- Run all examples (run long camera trace under all theme collected by [WonderJounrey](https://github.com/KovenYu/WonderJourney/tree/main))
+```bash
+sh ./run_all_demo.sh
+```
+(check the generated videos (in mp4 format) in ./output)
