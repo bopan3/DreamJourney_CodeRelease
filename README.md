@@ -2,7 +2,7 @@
     <img src="assets/logo.png" height=150>
 </p>
 
-# DreamJourney: Perpetual View Generation with Video Diffusion Models
+# DreamJourney: Perpetual View Generation with Video Diffusion Models (TMM 2025)
 
 <div align="center">
 
